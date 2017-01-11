@@ -4,8 +4,9 @@ require('isomorphic-fetch');
 import BaseHandler from './base.handler';
 import concierge from '../service-providers/concierge.service';
 import waiter from '../service-providers/order.service';
-import ConversationContext from '../models/conversation-context';
 import utilities from '../service-providers/general.service';
+
+import CONVERSATION_CONTEXT from '../models/conversation-context';
 
 class MessageHandler extends BaseHandler {
     constructor() {
@@ -16,26 +17,23 @@ class MessageHandler extends BaseHandler {
     }
 
     processMessage(req, res) {
-
-        const newConvoContext = ConversationContext;
+        const message = req.body.Body;
+        const newConvoContext = CONVERSATION_CONTEXT;
 
         let currentConvoContext = req.session
             ? req.session.currentConvoContext
             : {
                 ...newConvoContext
             };
+        let estimatedMessageSentiment = 'UNKNOWN';
+        let outcome = concierge.tryToHandleRequest(message);
 
-        const message = req.body.Body;
-        let messageSentiment = '';
-
-        let outcome = concierge.handleRequest(message);
-
-        if (outcome) {
-            res.json({response: outcome});
+        if (outcome.isOkay) {
+            res.json({response: outcome.content});
         } else {
-            messageSentiment = waiter.inferSentiment(currentConvoContext, message);
+            estimatedMessageSentiment = waiter.tryToInferSentiment(currentConvoContext, message);
 
-            switch (messageSentiment) {
+            switch (estimatedMessageSentiment) {
                 case 'PLACE_ORDER':
                     waiter.placeOrder(message);
                     break;

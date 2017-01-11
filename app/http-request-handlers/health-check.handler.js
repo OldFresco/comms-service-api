@@ -1,8 +1,8 @@
 import BaseHandler from './base.handler';
 import settings from '../config/settings';
 
-class MetaHandler extends BaseHandler {
-  index(req, res) {
+class HealthCheckHandler extends BaseHandler {
+  check(req, res) {
 		res.json({
 			version : settings.version,
 			health: 'ok'
@@ -10,4 +10,4 @@ class MetaHandler extends BaseHandler {
 	}
 }
 
-export default new MetaHandler();
+export default new HealthCheckHandler();

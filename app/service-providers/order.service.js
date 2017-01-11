@@ -1,9 +1,8 @@
 const waiter = {
-    inferSentiment(currentConvoContext, message) {
+    tryToInferSentiment(currentConvoContext, message) {
         // If we don't get a quick fire request, try and figure out what the user means
-        // based on his/her pervious message sentiment //infer message sentiment from
-        // context
-        if (currentConvoContext.previousMessageSentiment === '') {
+        // based on his/her pervious message sentiment
+        if (currentConvoContext.previousMessageSentiment === 'UNKNOWN') {
             return 'GREETING';
         } else if (currentConvoContext.previousMessageSentiment === 'GREETING') {
             // expecting current message sentiment to be to place order

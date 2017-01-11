@@ -1,4 +1,4 @@
-const conversationContext = {
+const CONVERSATION_CONTEXT = {
     'convoId': 'guid', //To-do
     'hasStarted': true,
     'hasEnded': false,
@@ -9,4 +9,4 @@ const conversationContext = {
     'previousMessageSentiment': ''
 };
 
-export default conversationContext;
+export default CONVERSATION_CONTEXT;

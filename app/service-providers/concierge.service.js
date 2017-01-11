@@ -1,15 +1,31 @@
 const concierge = {
     fetchMenu() {
-        return 'Jerk Chicken';
+        let outcome = {
+            'content': 'Jerk Chicken',
+            'isOkay': true
+        };
+
+        return outcome;
     },
     fetchOpeningHours() {
-        return 'All day err day';
+        let outcome = {
+            'content': 'All day err day',
+            'isOkay': true
+        };
+
+        return outcome;
     },
-    handleRequest(message) {
+    tryToHandleRequest(message) {
         if (message === 'Menu?') {
             return this.fetchMenu()
         } else if (message === 'Open?') {
             return this.fetchOpeningHours()
+        } else {
+            let outcome = {
+                'content': null,
+                'isOkay': false
+            }
+            return outcome
         }
     }
 };

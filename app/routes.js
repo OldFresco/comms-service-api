@@ -1,20 +1,13 @@
-import MetaHandler from './request-handlers/meta.handler';
-import MessageHandler from './request-handlers/message.handler';
+import HealthCheckHandler from './http-request-handlers/health-check.handler';
+import MessageHandler from './http-request-handlers/message.handler';
 import {Router} from 'express';
+import messageCleanser from './middleware/message-cleanser';
 import settings from './config/settings';
 
 const routes = new Router();
 const version = settings.apiVersion;
 
-const messageCleanser = function (req, res, next) {
-    req.body.Body = req
-        .body
-        .Body
-        .trim();
-    next()
-}
-
-routes.get(`${version}/health`, MetaHandler.index);
+routes.get(`${version}/health`, HealthCheckHandler.check);
 routes.post(`${version}/inbox`, messageCleanser, MessageHandler.processMessage);
 
 export default routes;

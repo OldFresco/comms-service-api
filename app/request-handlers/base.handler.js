@@ -1,4 +1,4 @@
-class BaseController {
+class BaseHandler {
     filterParams(params, whitelist) {
         const filtered = {};
         for (const key in params) {
@@ -31,4 +31,4 @@ class BaseController {
     }
 }
 
-export default BaseController
+export default BaseHandler

@@ -1,7 +1,7 @@
-import BaseController from './base.controller';
+import BaseHandler from './base.handler';
 import settings from '../config/settings';
 
-class MetaController extends BaseController {
+class MetaHandler extends BaseHandler {
   index(req, res) {
 		res.json({
 			version : settings.version,
@@ -10,4 +10,4 @@ class MetaController extends BaseController {
 	}
 }
 
-export default new MetaController();
+export default new MetaHandler();

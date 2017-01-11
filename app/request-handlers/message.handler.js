@@ -17,63 +17,24 @@ class MessageHandler extends BaseHandler {
 
     processMessage(req, res) {
 
-        //Define blank convo context for new convo
-        const freshConvoContext = ConversationContext;
+        const newConvoContext = ConversationContext;
 
-        // set the current convo context according to session cookie or assume new if no
-        // cookie present
         let currentConvoContext = req.session
             ? req.session.currentConvoContext
             : {
-                ...freshConvoContext
+                ...newConvoContext
             };
 
-        //Exctract the message
         const message = req.body.Body;
         let messageSentiment = '';
 
-        //If user needs something we can do at any time return early
-        if (message === 'Menu') {
+        let outcome = concierge.handleRequest(message);
 
-            let menuItems = concierge.fetchMenu();
-            res.json({response: menuItems});
-        } else if (message === 'Open?') {
-
-            let openingHoursDetail = concierge.fetchOpeningHours();
-            res.json({response: openingHoursDetail});
+        if (outcome) {
+            res.json({response: outcome});
         } else {
+            messageSentiment = waiter.inferSentiment(currentConvoContext, message);
 
-            // If we don't get a quick fire request, try and figure out what the user means
-            // based on his/her pervious message sentiment
-            if (currentConvoContext.previousMessageSentiment === '') {
-                messageSentiment = 'GREETING';
-            } else if (currentConvoContext.previousMessageSentiment === 'GREETING') {
-                // expecting current message sentiment to be to place order
-                if (waiter.orderRequestMakesSense(message)) {
-                    messageSentiment = 'PLACE_ORDER';
-                } else {
-                    messageSentiment = 'COMPREHENSION_FAILURE';
-                }
-            } else if (currentConvoContext.previousMessageSentiment === 'PLACE_ORDER') {
-                // expecting current message sentiment to be either to pre confirm order or
-                // update the order
-                if (waiter.orderConfirmationMakesSense(message)) {
-                    messageSentiment = 'PRE_CONFIRM_ORDER';
-                } else if (waiter.orderEditRequestMakesSense(message)) {
-                    messageSentiment = 'UPDATE_ORDER';
-                } else {
-                    messageSentiment = 'COMPREHENSION_FAILURE';
-                }
-            } else if (currentConvoContext.previousMessageSentiment === 'PRE_CONFIRM_ORDER') {
-                // expecting order to have been pre-confirmed
-                if (waiter.orderConfirmationMakesSense(message)) {
-                    messageSentiment = 'FINAL_CONFIRM_ORDER';
-                } else {
-                    messageSentiment = 'COMPREHENSION_FAILURE';
-                }
-            }
-
-            // Having figured out what the user needs, do what we need to do
             switch (messageSentiment) {
                 case 'PLACE_ORDER':
                     waiter.placeOrder(message);

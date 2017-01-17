@@ -4,8 +4,8 @@ class BaseConversationContext {
     constructor(Id = 'guid', hasStarted = true, hasEnded = false, messageIntentHistory = []) {
         this.Id = Id;
         this.hasStarted = hasStarted;
-        this.hasEnded;
-        this.messageIntentHistory;
+        this.hasEnded = hasEnded;
+        this.messageIntentHistory = messageIntentHistory;
     }
 
     getLastMessageIntent() {

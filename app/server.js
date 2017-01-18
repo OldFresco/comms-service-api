@@ -5,11 +5,17 @@ import express from 'express';
 import helmet from 'helmet';
 import methodOverride from 'method-override';
 import morgan from 'morgan';
+import redis from 'redis';
 import routes from './routes';
 import settings from './config/settings';
 
+let client = redis.createClient();
 let app = express();
 
+client.on('connect', function() {
+  // eslint-disable-next-line no-console  
+    console.log('   Woo Hoo! Redis connected!\n');
+});
 // Adds some security best practices
 app.use(helmet());
 app.use(cors());

@@ -1,4 +1,4 @@
-const messageCleanser = (req, res, next) => {
+const messageModerator = (req, res, next) => {
     req.body.Body = req
         .body
         .Body
@@ -6,4 +6,4 @@ const messageCleanser = (req, res, next) => {
     next()
 }
 
-export default messageCleanser;
+export default messageModerator;

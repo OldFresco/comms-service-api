@@ -1,20 +1,20 @@
-import UNKNOWN from './labels/message-sentiments';
+import UNKNOWN from './labels/message-sentiments'
 
 class BaseMessage {
 
-    constructor(content = '', sentiment = UNKNOWN) {
-        this.content = content;
-        this.sentiment = sentiment;
-        this.senderId;
-    }
+  constructor (content = '' , sentiment = UNKNOWN) {
+    this.content = content
+    this.sentiment = sentiment
+    this.senderId
+  }
 
-    getContent() {
-        return this.content;
-    }
+  getContent () {
+    return this.content
+  }
 
-    getSender() {
-        return this.senderId;
-    }
+  getSender () {
+    return this.senderId
+  }
 }
 
-export default BaseMessage;
+export default BaseMessage

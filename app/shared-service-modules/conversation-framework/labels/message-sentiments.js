@@ -1,1 +1,1 @@
-export const UNKNOWN = 'UNKNOWN';
+export const UNKNOWN = 'UNKNOWN'

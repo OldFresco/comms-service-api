@@ -1,5 +1,5 @@
-import path from 'path';
-import {merge} from 'lodash';
+import { merge } from 'lodash'
+import path from 'path'
 
 // Default configuations applied to all environments
 const defaultConfig = {
@@ -28,7 +28,7 @@ const defaultConfig = {
     sessionExpiration: process.env.SESSION_EXPIRATION || 60 * 60 * 24 * 7, // 1 week
     saltRounds: process.env.SALT_ROUNDS || 12
   }
-};
+}
 
 // Environment specific overrides
 const environmentConfigs = {
@@ -45,7 +45,7 @@ const environmentConfigs = {
   },
   production: {
   }
-};
+}
 
 // Recursively merge configurations
-export default merge(defaultConfig, environmentConfigs[process.env.NODE_ENV] || {});
+export default merge(defaultConfig, environmentConfigs[process.env.NODE_ENV] || {})

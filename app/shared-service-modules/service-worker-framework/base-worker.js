@@ -1,26 +1,26 @@
 class BaseWorker {
 
-    constructor(memory) {
-        this.memory = memory;
-    }
+  constructor (memory) {
+    this.memory = memory
+  }
 
-    commitToMemory(event) {
-        this
-            .memory
-            .save(event);
-    }
+  commitToMemory (event) {
+    this
+      .memory
+      .save(event)
+  }
 
-    recall(eventId) {
-        this
-            .memory
-            .getEvent(eventId);
-    }
+  recall (eventId) {
+    this
+      .memory
+      .getEvent(eventId)
+  }
 
-    recallLast() {
-        this
-            .memory
-            .getLatest();
-    }
+  recallLast () {
+    this
+      .memory
+      .getLatest()
+  }
 }
 
-export default BaseWorker;
+export default BaseWorker

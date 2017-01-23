@@ -1,10 +1,10 @@
-import UNKNOWN from './labels/message-sentiments'
+import UNKNOWN from './labels/message-intents'
 
 class BaseMessage {
 
-  constructor (content = '' , sentiment = UNKNOWN) {
+  constructor (content = '' , intent = UNKNOWN) {
     this.content = content
-    this.sentiment = sentiment
+    this.intents = intent
     this.senderId
   }
 

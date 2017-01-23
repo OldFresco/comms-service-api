@@ -1,16 +1,25 @@
 import IntentBuilder from './intent-builder'
 
 class DeterminsticInputIntentMapping {
-  constructor() {
-    this.inputIntentMap = {}
-  }
+    constructor() {
+        this.inputIntentMap = {}
+    }
 
-  addMapping(input, value) {
-    this.inputIntentMap.input = new IntentBuilder()
-      .intentIs(value)
-      .withCertainty(1.0)
-      .build()
-  }
+    addMapping(input, intentValue) {
+        this.inputIntentMap[input] = new IntentBuilder()
+            .intentIs(intentValue)
+            .withCertainty(1.0)
+            .build()
+    }
+
+    addMappings(intentValue, inputs) {
+        inputs.map((input) => {
+            this.inputIntentMap[input] = new IntentBuilder()
+            .intentIs(intentValue)
+            .withCertainty(1.0)
+            .build()
+        })
+    }
 }
 
 export default DeterminsticInputIntentMapping;

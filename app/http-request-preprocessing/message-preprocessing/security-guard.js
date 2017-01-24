@@ -1,8 +1,10 @@
+import Filter from 'bad-words'
+
 const securityGuard = (req, res, next) => {
-  req.body.Body = req
-    .body
-    .Body
-    .trim()
+
+  let filter = new Filter()
+
+  req.body.Body = filter.clean('req.body.Body')
   next()
 }
 

@@ -6,8 +6,8 @@ import helmet from 'helmet'
 import methodOverride from 'method-override'
 import morgan from 'morgan'
 import redis from 'redis'
-import routes from './routes'
-import settings from './config/settings'
+import routes from './routes/routes.js'
+import settings from './configuration/settings'
 
 let client = redis.createClient()
 let app = express()

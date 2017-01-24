@@ -1,12 +1,12 @@
 const hasBody = (message) => {
-  message != '';
+  message != ''
 }
 
 const messageModerator = (req, res, next) => {
 
-  if (!hasBody(req.Body.body)) 
+  if (!hasBody(req.Body.body))
     throw new Error()
-    
+
   next()
 }
 

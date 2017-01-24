@@ -3,6 +3,7 @@ const messageCleanser = (req, res, next) => {
     .body
     .Body
     .trim()
+    .toLowerCase()
   next()
 }
 

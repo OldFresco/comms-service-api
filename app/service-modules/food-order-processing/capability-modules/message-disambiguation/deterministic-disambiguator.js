@@ -4,7 +4,7 @@ const defineDeterminsticInputIntentMapping = () => {
 
   let inputIntentMap = new DeterminsticInputIntentMapping()
 
-  inputIntentMap.addMapping('GREETING', [
+  inputIntentMap.addMappings('GREETING', [
     'hi',
     'yo',
     'hey',
@@ -15,46 +15,46 @@ const defineDeterminsticInputIntentMapping = () => {
     'how do i use this thing?'
   ])
 
-  inputIntentMap.addMapping('VIEW_MENU', [
+  inputIntentMap.addMappings('VIEW_MENU', [
     'menu?', 
     'menu please', 
     'what food do you have?', 
     'what\'s on?'
   ])
 
-  inputIntentMap.addMapping('VIEW_OPENING_TIMES', [
+  inputIntentMap.addMappings('VIEW_OPENING_TIMES', [
     'open?', 
     'closed?', 
     'you open?', 
     'you closed?'
   ])
 
-  inputIntentMap.addMapping('VIEW_CURRENT_WAITING_TME', [
+  inputIntentMap.addMappings('VIEW_CURRENT_WAITING_TME', [
     'wait?', 
     'what\'s the wait?', 
     'how long?'
   ])
 
-  inputIntentMap.addMapping('READY_TO_ORDER', [
+  inputIntentMap.addMappings('READY_TO_ORDER', [
     'ready!', 
     'i\'m ready to order'
   ])
 
-  inputIntentMap.addMapping('CANCEL_ORDER', [
+  inputIntentMap.addMappings('CANCEL_ORDER', [
     'no thanks!', 
     'nvm', 
     'peace', 
     'bye'
   ])
 
-  inputIntentMap.addMapping('POSITIVE_CONFIRMATION', [
+  inputIntentMap.addMappings('POSITIVE_CONFIRMATION', [
     'yea',
     'yea, that\'s the fine',
     'ok, that\'s the fine',
     'ok'
   ])
 
-  inputIntentMap.addMapping('NEGATIVE_CONFIRMATION', [
+  inputIntentMap.addMappings('NEGATIVE_CONFIRMATION', [
     'no',
     'nah'
   ])
@@ -65,7 +65,7 @@ const defineDeterminsticInputIntentMapping = () => {
 const disambiguate = (message) => {
   const deterministicIntentMap = defineDeterminsticInputIntentMapping()
 
-  return deterministicIntentMap[message] || null
+  return deterministicIntentMap.inputIntentMap[message].value || null
 }
 
 export default disambiguate

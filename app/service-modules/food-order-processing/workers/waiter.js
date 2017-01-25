@@ -4,8 +4,7 @@ class Waiter extends BaseWorker {
 
   constructor (memoryModule, messageDisambiguationModule) {
     super()
-    this.brain = {}
-    this.brain.disambiguate = messageDisambiguationModule
+    this.brain = messageDisambiguationModule
     this.memory = memoryModule
   }
 
@@ -37,14 +36,18 @@ class Waiter extends BaseWorker {
         .brain
         .disambiguate(message)
 
+      let outcome = 'UNKNOWN'
+
       switch (estimatedMessageIntent) {
         case 'GREETING':
-          this.greetSender(estimatedMessageIntent)
+          outcome = this.greetSender(estimatedMessageIntent)
           break
         default:
-          this.expressLackOfComprehension(estimatedMessageIntent)
+          outcome = this.expressLackOfComprehension(estimatedMessageIntent)
 
       }
+
+      return outcome
     }
   }
 

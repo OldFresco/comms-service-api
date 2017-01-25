@@ -14,7 +14,7 @@ let app = express()
 
 client.on('connect', function () {
   // eslint-disable-next-line no-console  
-  console.log('   Woo Hoo! Redis connected!\n')
+  console.log('    Woo Hoo! Redis connected!\n')
 })
 // Adds some security best practices
 app.use(helmet())

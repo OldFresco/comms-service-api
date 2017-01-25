@@ -4,8 +4,8 @@ const hasBody = (message) => {
 
 const messageModerator = (req, res, next) => {
 
-  if (!hasBody(req.Body.body))
-    throw new Error()
+  if (!hasBody(req.body.Body))
+    //throw new Error()
 
   next()
 }

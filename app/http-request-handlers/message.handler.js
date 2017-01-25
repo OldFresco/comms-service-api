@@ -14,12 +14,13 @@ class MessageHandler extends BaseHandler {
 
   processMessage (req, res) {
     const message = req.body.Body
-    const disambiguator = disambiguate()
+    const brain = {}
 
-    let waiter = new Waiter(null, disambiguator)
+    brain.disambiguate = disambiguate
 
+    let waiter = new Waiter(null, brain)
     let outcome = waiter.actOnMessage(message)
-
+    
     res.json({response: outcome})
   }
 }

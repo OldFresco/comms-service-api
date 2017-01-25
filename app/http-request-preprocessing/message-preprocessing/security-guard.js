@@ -4,7 +4,7 @@ const securityGuard = (req, res, next) => {
 
   let filter = new Filter()
 
-  req.body.Body = filter.clean('req.body.Body')
+  req.body.Body = filter.clean(req.body.Body)
   next()
 }
 

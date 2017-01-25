@@ -1,5 +1,5 @@
 import BaseHandler from './base.handler'
-import settings from '../config/settings'
+import settings from '../configuration/settings'
 
 class HealthCheckHandler extends BaseHandler {
   check (req, res) {

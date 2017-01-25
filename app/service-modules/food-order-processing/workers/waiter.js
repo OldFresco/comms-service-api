@@ -1,25 +1,60 @@
-class Waiter {
+import BaseWorker from '../../../shared-service-modules/service-worker-framework/base-worker'
+
+class Waiter extends BaseWorker {
 
   constructor (memoryModule, messageDisambiguationModule) {
-    this.memory= memoryModule
-    this.brain= messageDisambiguationModule
+    super()
+    this.brain = {}
+    this.brain.disambiguate = messageDisambiguationModule
+    this.memory = memoryModule
   }
 
-  recognizesSender(senderId) {}
+  recognizesSender (senderId) {
+    if (senderId)
+      return true
+  }
 
-  understandsMessage(message) {}
+  understandsMessage (message) {
+    if (message)
+      return true
+  }
 
-  recallLastUserMessage() {}
+  recallLastUserMessage () {
+    return 'last message'
+  }
 
-  recallConvesation() {}
+  recallConvesation () {
+    return 'convoId'
+  }
 
-  recallLastAction() {}
+  recallLastAction () {
+    return 'last action'
+  }
 
-  processMessage(message) {}
+  actOnMessage (message) {
+    if (message) {
+      let estimatedMessageIntent = this
+        .brain
+        .disambiguate(message)
 
-  greetUser() {}
+      switch (estimatedMessageIntent) {
+        case 'GREETING':
+          this.greetSender(estimatedMessageIntent)
+          break
+        default:
+          this.expressLackOfComprehension(estimatedMessageIntent)
 
+      }
+    }
+  }
 
+  greetSender () {
+    return 'Hi! Was gud?'
+  }
+
+  expressLackOfComprehension () {
+    return 'What?!'
+  }
 
 }
 

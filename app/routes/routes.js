@@ -1,10 +1,10 @@
-import HealthCheckHandler from './http-request-handlers/health-check.handler'
-import MessageHandler from './http-request-handlers/message.handler'
+import HealthCheckHandler from '../http-request-handlers/health-check.handler'
+import MessageHandler from '../http-request-handlers/message.handler'
 import { Router } from 'express'
 import cleanser from '../http-request-preprocessing/message-preprocessing/cleanser'
 import moderator from '../http-request-preprocessing/message-preprocessing/moderator'
 import securityGuard from '../http-request-preprocessing/message-preprocessing/security-guard'
-import settings from './configuration/settings'
+import settings from '../configuration/settings'
 
 const routes = new Router()
 const version = settings.apiVersion

@@ -2,9 +2,9 @@ import BaseWorker from '../../../shared-service-modules/service-worker-framework
 
 class Waiter extends BaseWorker {
 
-  constructor (memoryModule, messageDisambiguationModule) {
+  constructor (memoryModule, brainnModule) {
     super()
-    this.brain = messageDisambiguationModule
+    this.brain = brainnModule
     this.memory = memoryModule
   }
 
@@ -40,10 +40,10 @@ class Waiter extends BaseWorker {
 
       switch (estimatedMessageIntent) {
         case 'GREETING':
-          outcome = this.greetSender(estimatedMessageIntent)
+          outcome = this.greetSender()
           break
         default:
-          outcome = this.expressLackOfComprehension(estimatedMessageIntent)
+          outcome = this.expressLackOfComprehension()
 
       }
 
@@ -58,7 +58,6 @@ class Waiter extends BaseWorker {
   expressLackOfComprehension () {
     return 'What?!'
   }
-
 }
 
 export default Waiter

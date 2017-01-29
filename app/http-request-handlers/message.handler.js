@@ -1,10 +1,9 @@
 require('es6-promise').polyfill()
 
+import BaseConversation from '../shared-service-modules/conversation-framework/base-conversation'
 import BaseHandler from './base.handler'
 import Waiter from '../service-modules/food-order-processing/workers/waiter'
-import disambiguate from '../service-modules/food-order-processing/capability-modules/message-disambiguati' +
-  'on/deterministic-disambiguator'
-import BaseConversation from '../shared-service-modules/conversation-framework/base-conversation'
+import disambiguate from '../service-modules/food-order-processing/capability-modules/message-disambiguation/deterministic-disambiguator'
 
 class MessageHandler extends BaseHandler {
   constructor() {

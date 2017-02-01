@@ -4,7 +4,7 @@ let cachingClient = redis.createClient()
 
 cachingClient.on('error', (err) => {
   // eslint-disable-next-line no-console      
-  console.log('Error' + err)
+  console.log('   Error connecting to Redis cache :(' + err)
 })
 
 cachingClient.on('connect', () => {

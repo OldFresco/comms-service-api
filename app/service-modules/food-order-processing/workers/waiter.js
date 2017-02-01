@@ -2,9 +2,9 @@ import BaseWorker from '../../../shared-service-modules/service-worker-framework
 
 class Waiter extends BaseWorker {
 
-  constructor (memoryModule, brainnModule) {
+  constructor (memoryModule, brainModule) {
     super()
-    this.brain = brainnModule
+    this.brain = brainModule
     this.memory = memoryModule
   }
 

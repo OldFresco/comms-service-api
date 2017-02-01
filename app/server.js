@@ -1,20 +1,20 @@
 import bodyParser from 'body-parser'
+import cache from './caching'
 import cors from 'cors'
 import errorHandler from 'errorhandler'
 import express from 'express'
 import helmet from 'helmet'
 import methodOverride from 'method-override'
 import morgan from 'morgan'
-import redis from 'redis'
 import routes from './routes/routes.js'
 import settings from './configuration/settings'
 
-let client = redis.createClient()
 let app = express()
 
-client.on('connect', function () {
+cache.set('TestKey', '    TestValue successfuly set & retrieved from cache')
+cache.get('TestKey', function (err, reply) {
   // eslint-disable-next-line no-console  
-  console.log('    Woo Hoo! Redis connected!\n')
+  console.log(reply)
 })
 // Adds some security best practices
 app.use(helmet())

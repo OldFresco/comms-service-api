@@ -5,7 +5,7 @@ import BaseHandler from './base.handler'
 import Memory from '../services/food-order-processing/capabilities/memory'
 import Waiter from '../services/food-order-processing/workers/waiter'
 import cache from '../caching'
-import disambiguate from '../services/food-order-processing/capabilities/message-disambiguation/deterministic-disambiguator'
+import disambiguator from '../services/food-order-processing/capabilities/message-disambiguation/deterministic-disambiguator'
 
 class MessageHandler extends BaseHandler {
   constructor () {
@@ -19,15 +19,17 @@ class MessageHandler extends BaseHandler {
     const message = req.body.Body
     const senderId = req.body.senderId
 
-    // Setup Brain
-    let brain = {}
-    brain.disambiguate = disambiguate
-
     // Setup memory
     let memory = new Memory(cache)
 
+    // Setup Brain
+    let brain = {
+      disambiguator : disambiguator,
+      memory : memory
+    }
+
     // Setup waiter worker
-    let waiter = new Waiter(memory, brain)
+    let waiter = new Waiter(brain)
 
     // See if waiter remembers sender and hence conversation
     let convo = waiter.recognizesSender(senderId)

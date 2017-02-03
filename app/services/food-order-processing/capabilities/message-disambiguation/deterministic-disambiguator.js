@@ -62,10 +62,10 @@ const defineDeterminsticInputIntentMapping = () => {
   return inputIntentMap
 }
 
-const disambiguate = (message) => {
+const disambiguator = (message) => {
   const deterministicIntentMap = defineDeterminsticInputIntentMapping()
 
   return deterministicIntentMap.inputIntentMap[message].value || null
 }
 
-export default disambiguate
+export default disambiguator

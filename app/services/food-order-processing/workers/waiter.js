@@ -1,10 +1,10 @@
 class Waiter {
 
-  constructor (memoryModule, brainModule) {
+  constructor (brainModule) {
     this.brain = brainModule
-    this.memory = memoryModule
 
-    this.memory.stubMethod()
+    //Stub method to test memory mechanism works
+    this.brain.memory.stubMethod()
   }
 
   recognizesSender (senderId) {
@@ -33,7 +33,7 @@ class Waiter {
     if (message) {
       let estimatedMessageIntent = this
         .brain
-        .disambiguate(message)
+        .disambiguator(message)
 
       let outcome = 'UNKNOWN'
 

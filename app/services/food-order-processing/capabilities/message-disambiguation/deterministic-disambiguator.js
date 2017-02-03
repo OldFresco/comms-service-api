@@ -1,4 +1,4 @@
-import DeterminsticInputIntentMapping from '../../../../shared-service-modules/conversation-framework/deterministic-input-intent-mapping'
+import DeterminsticInputIntentMapping from '../../../../general/conversation-framework/deterministic-input-intent-mapping'
 
 const defineDeterminsticInputIntentMapping = () => {
 

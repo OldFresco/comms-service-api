@@ -11,7 +11,8 @@ import settings from './configuration/settings'
 
 let app = express()
 
-cache.set('TestKey', '    TestValue successfuly set & retrieved from cache')
+//Test to check cache works as expected
+cache.set('TestKey', '    TestValue successfuly set & retrieved from cache\n')
 cache.get('TestKey', function (err, reply) {
   // eslint-disable-next-line no-console  
   console.log(reply)
@@ -43,10 +44,13 @@ if (settings.envs.development) {
 app.listen(settings.port, () => {
   // eslint-disable-next-line no-console
   console.log(`
+    === App Server ===
+
+    Connected on:
+    
     Port: ${settings.port}
     Env: ${app.get('env')}
     
-    Keep on rockin' in the free world!
   `)
 })
 

@@ -1,34 +1,45 @@
 require('es6-promise').polyfill()
 
-import BaseConversation from '../shared-service-modules/conversation-framework/base-conversation'
+import BaseConversation from '../general/conversation-framework/base-conversation'
 import BaseHandler from './base.handler'
-import Waiter from '../service-modules/food-order-processing/workers/waiter'
-import disambiguate from '../service-modules/food-order-processing/capability-modules/message-disambiguation/deterministic-disambiguator'
+import Memory from '../services/food-order-processing/capabilities/memory'
+import Waiter from '../services/food-order-processing/workers/waiter'
+import cache from '../caching'
+import disambiguate from '../services/food-order-processing/capabilities/message-disambiguation/deterministic-disambiguator'
 
 class MessageHandler extends BaseHandler {
-  constructor() {
+  constructor () {
     super()
     this.processMessage = this
       .processMessage
       .bind(this)
   }
 
-  processMessage(req, res) {
+  processMessage (req, res) {
     const message = req.body.Body
     const senderId = req.body.senderId
-    let brain = {}
 
+    // Setup Brain
+    let brain = {}
     brain.disambiguate = disambiguate
 
-    let waiter = new Waiter(null, brain)
+    // Setup memory
+    let memory = new Memory(cache)
+
+    // Setup waiter worker
+    let waiter = new Waiter(memory, brain)
+
+    // See if waiter remembers sender and hence conversation
     let convo = waiter.recognizesSender(senderId)
       ? waiter.recallConvesation(senderId)
       : new BaseConversation([
         'waiter', senderId
       ], 'NEW_CONVO')
 
+    // Map to action based on input
     let outcome = waiter.actOnMessage(message, convo)
 
+    // Let app output response
     res.json({response: outcome})
   }
 }

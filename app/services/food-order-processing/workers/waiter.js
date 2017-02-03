@@ -3,6 +3,8 @@ class Waiter {
   constructor (memoryModule, brainModule) {
     this.brain = brainModule
     this.memory = memoryModule
+
+    this.memory.stubMethod()
   }
 
   recognizesSender (senderId) {

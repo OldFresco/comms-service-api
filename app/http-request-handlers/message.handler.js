@@ -24,8 +24,8 @@ class MessageHandler extends BaseHandler {
 
     // Setup Brain
     let brain = {
-      disambiguator : disambiguator,
-      memory : memory
+      disambiguator: disambiguator,
+      memory: memory
     }
 
     // Setup waiter worker

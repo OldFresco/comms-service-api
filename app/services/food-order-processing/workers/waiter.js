@@ -7,26 +7,10 @@ class Waiter {
     this.brain.memory.stubMethod()
   }
 
-  recognizesSender (senderId) {
-    if (senderId)
-      return true
-  }
 
   understandsMessage (message) {
     if (message)
       return true
-  }
-
-  recallLastUserMessage () {
-    return 'last message'
-  }
-
-  recallConvesation () {
-    return 'convoId'
-  }
-
-  recallLastAction () {
-    return 'last action'
   }
 
   actOnMessage (message) {

@@ -1,10 +1,11 @@
-class BaseConversation {
+class Conversation {
 
-  constructor (participantIds, context) {
-    this.participantIds = participantIds
+  constructor (participants, context) {
+    this.participants = participants
     this.messages = []
     this.startedAt = new Date()
     this.context = context
+    this.convoId = 'convoId'
   }
 
   getLastMessage () {
@@ -18,4 +19,4 @@ class BaseConversation {
   }
 }
 
-export default BaseConversation
+export default Conversation
